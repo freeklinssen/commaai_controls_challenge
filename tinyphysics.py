@@ -188,7 +188,10 @@ class TinyPhysicsSimulator:
     jerk_cost = np.mean((np.diff(pred) / DEL_T)**2) * 100
     total_cost = (lat_accel_cost * LAT_ACCEL_COST_MULTIPLIER) + jerk_cost
     return {'lataccel_cost': lat_accel_cost, 'jerk_cost': jerk_cost, 'total_cost': total_cost}
-
+  
+  def return_history(self) -> dict:
+      return {'lataccel_history' : self.current_lataccel_history, 'action_history' : self.action_history, 'state_history': self.state_history}
+  
   def rollout(self) -> Dict[str, float]:
     if self.debug:
       plt.ion()
