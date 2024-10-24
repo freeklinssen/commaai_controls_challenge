@@ -16,7 +16,7 @@ class Controller(BaseController):
     self.prev_error = 0
     
     self.steer_factor = 13 # lat accel to steer command factor
-    self.steer_sat_v = 20 # saturate v measurements for steerign
+    self.minimum_v = 20 
         
 
   def update(self, target_lataccel, current_lataccel, state, future_plan):
@@ -55,7 +55,7 @@ class Controller(BaseController):
       
       # estimate steer command with target target lateral acceleration  
       steer_lataccel_target = (target_lataccel - state.roll_lataccel)
-      steer_command = steer_lataccel_target * (self.steer_factor / max(self.steer_sat_v, state.v_ego))
+      steer_command = steer_lataccel_target * (self.steer_factor / max(self.minimum_v, state.v_ego))
       
       # tanh to dampen extremes
       steer_command = 2 * np.tanh(steer_command/2)
