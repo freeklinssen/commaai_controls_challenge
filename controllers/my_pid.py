@@ -19,8 +19,7 @@ class Controller(BaseController):
     self.prev_action = 0
     
     self.steer_factor = 12.5 # lat accel to steer command factor
-    self.minimum_v = 20 
-    self.sigma = 1    
+    self.minimum_v = 20    
 
 
   def update(self, target_lataccel, current_lataccel, state, future_plan):
